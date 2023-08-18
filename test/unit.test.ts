@@ -74,4 +74,12 @@ describe('unit test', function () {
     );
     expect(count).toEqual(5);
   });
+  it('should return null if startdate and end date not provided', () => {
+    const count = dateHelper.getDateRangeCount(
+      '',
+      '',
+      holidays
+    );
+    expect(count).toBeNull;
+  });
 });

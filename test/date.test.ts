@@ -66,3 +66,37 @@ describe('calculateTimeOff', function () {
     expect(dayDiff).toEqual('5H 2mn');
   });
 });
+
+describe('setDisplayHour', function () {
+  it('should return empty if previous is empty', () => {
+    const previous = '';
+    const latter = '00:00';
+    const displayHour = dateHelper.setDisplayHour(latter, previous);
+    expect(displayHour).toEqual('');
+  });
+  it('should return empty if latter is empty', () => {
+    const previous = '00:05';
+    const latter = '';
+    const displayHour = dateHelper.setDisplayHour(latter, previous);
+    expect(displayHour).toEqual('');
+  });
+  it('should return correct display hour format HOUR:MINUTE 一 HOUR:MINUTE AM/PM', () => {
+    const left = '00:05';
+    const right = '05:10';
+    const displayHour = dateHelper.setDisplayHour(left, right);
+    expect(displayHour).toEqual('00:05 一 05:10 AM');
+  });
+});
+
+describe('setDisplayDate', function () {
+  it('display date as format MM/DD/YYYY', () => {
+    const date = new Date('2023-08-18')
+    const displayDate = dateHelper.setDisplayDate(date);
+    expect(displayDate).toEqual('08/18/2023');
+  });
+  it('display date as format MM/DD/YYYY when with date string', () => {
+    const date = '2023-08-18'
+    const displayDate = dateHelper.setDisplayDate(date);
+    expect(displayDate).toEqual('08/18/2023');
+  });
+});
